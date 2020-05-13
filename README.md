@@ -1,177 +1,177 @@
-# Vim Cheatsheet
+# Vim チートシート（日本語版）
 
 >Disclaimer: This cheatsheet is summarized from personal experience and other online tutorials. It should not be considered as an official advice.
+> 原文: ackjutsu/vim-cheatsheet
 
-## Global
+## 全般
 ```bash
-:help keyword # open help for keyword
-:o file       # open file
-:saveas file  # save file as
-:close        # close current pane
+:help KEYWORD      # KEYWORDに合うヘルプを表示
+:o FILE            # FILEをひらく
+:saveas FILE_NAME  # FILE_NAMEとして保存する
+:close             # 現在のパネルを閉じる．
 ```
 
-## Cursor movement
+## カーソル動作
 ```bash
-h        # move cursor left
-j        # move cursor down
-k        # move cursor up
-l        # move cursor right
-H        # move to top of screen
-M        # move to middle of screen
-L        # move to bottom of screen
-w        # jump forwards to the start of a word
-W        # jump forwards to the start of a word (words can contain punctuation)
-e        # jump forwards to the end of a word
-E        # jump forwards to the end of a word (words can contain punctuation)
-b        # jump backwards to the start of a word
-B        # jump backwards to the start of a word (words can contain punctuation)
-0        # jump to the start of the line
-^        # jump to the first non-blank character of the line
-$        # jump to the end of the line
-g_       # jump to the last non-blank character of the line
-gg       # go to the first line of the document
-G        # go to the last line of the document
-5G       # go to line 5
-fx       # jump to next occurrence of character x
-tx       # jump to before next occurrence of character x
-}        # jump to next paragraph (or function/block, when editing code)
-{        # jump to previous paragraph (or function/block, when editing code)
-zz       # center cursor on screen
-Ctrl + b # move back one full screen
-Ctrl + f # move forward one full screen
-Ctrl + d # move forward 1/2 a screen
-Ctrl + u # move back 1/2 a screen
+h        # ← : 左に進む
+j        # ↓ : 下
+k        # ↑ : 上
+l        # → : 右
+H        # 表示中の最上行
+M        # 　　　　中央行
+L        # 　　　　最下行
+w        # 単語の先頭に進む（大文字`W`で 
+e        # 　　　末尾に進む（大文字`E`で 句読点を単語として認識する挙動）
+b        # 単語の先頭に戻る（大文字`B`で
+0        # 行頭に移動
+^        # 行頭に移動（行頭の空白文字をスキップして・除いて）
+$        # 行末に移動
+g_       # 行末に移動（行末の空白文字を除いて）
+gg       # 文書の最初行に移動
+G        # 文書の最終行に移動
+5G       # 5行目に移動
+fx       # 文字「x」の次に出現する位置に移動する
+tx       # 文字「x」の次に出現する位置の手前に移動する（一文字手前に移動する）
+}        # 次段落に移動（コード編集時は関数やコードブロックが該当する）
+{        # 前段落に移動（コード編集時は関数やコードブロックが該当する）
+zz       # 画面中央にフォーカス（訳注: 要検証?）
+Ctrl + b # 一画面分，戻る（原文: move back one full screen）
+Ctrl + f # 一画面分，進む（原文: move forward one full screen）
+Ctrl + d # 半画面分，進む（原文: move forward 1/2 a screen）
+Ctrl + u # 半画面分，戻る（原文: move back 1/2 a screen）
 ```
 
-## Insert mode - inserting/appending text
+## 挿入・入力・追加モード
 ```bash
-i        # insert before the cursor
-I        # insert at the beginning of the line
-a        # insert (append) after the cursor
-A        # insert (append) at the end of the line
-o        # append (open) a new line below the current line
-O        # append (open) a new line above the current line
-ea       # insert (append) at the end of the word
-Esc      # exit insert mode
+i        # カーソル手前より挿入
+I        # 行頭より挿入
+a        # カーソル直後より挿入（追加）
+A        # 行末より挿入（追加）
+o        # 現在行直下に新規行を追加（オープン）
+O        # 現在行直上に新規行を追加（オープン）
+ea       # 単語末尾に挿入
+Esc      # モード終了
 ```
 
-## Editing
+## 編集モード
 ```bash
-r        # replace a single character
-J        # join line below to the current one
-cc       # change (replace) entire line
-cw       # change (replace) to the start of the next word
-ce       # change (replace) to the end of the next word
-cb       # change (replace) to the start of the previous word
-c0       # change (replace) to the start of the line
-c$       # change (replace) to the end of the line
-s        # delete character and substitute text
-S        # delete line and substitute text (same as cc)
-xp       # transpose two letters (delete and paste)
-.        # repeat last command
-u        # undo
-Ctrl + r # redo
+r        # 置換（1文字）
+J        # 現在行に直下行を結合させる
+cc       # 置換（行全体）
+cw       # 置換（次単語先頭に）
+ce       # 置換（次単語末尾に）
+cb       # 置換（前単語先頭に）
+c0       # 置換（行頭に）
+c$       # 置換（行末に）
+s        # 文字を削除し，文を置き換える
+S        # 文字を削除し，文を置き換える（`CC`相当）
+xp       # 2文字を転置（入れ替え？）（削除と貼り付け操作）
+.        # 前のコマンドを繰り返す
+u        # 操作を戻す
+Ctrl + r # 操作を進める
 ```
 
-## Marking text (visual mode)
+## 視覚的なモード（文章の印付け・ヴィジュアルモード）
 ```bash
-v        # start visual mode, mark lines, then do a command (like y-yank)
-V        # start linewise visual mode
-o        # move to other end of marked area
-O        # move to other corner of block
-aw       # mark a word
-ab       # a block with ()
-aB       # a block with {}
-ib       # inner block with ()
-iB       # inner block with {}
-Esc      # exit visual mode
-Ctrl + v # start visual block mode
+v        # モード開始, 印付けする, その後に視覚的コマンドを挿入する (`y`を押して，ヤンク（コピー相当の機能）するなど)
+V        # モード開始（行毎の印付け）
+o        # 印付けされた箇所の先頭に移動
+O        # 印付けされた箇所の末尾に移動
+aw       # 単語ごと記しづけする
+ab       # `()`に沿ったブロックごとに（原文: a block with ()　）
+aB       # `{}`に沿ったブロックごとに（原文: a block with {}　）
+ib       # `()`に沿ったブロックの中を（原文: inner block with ()　）
+iB       # `{}`に沿ったブロックの中を（原文: inner block with {}　）
+Esc      # モード終了
+Ctrl + v # 短形視覚的モード（ヴィジュアルブロック・モード，短形ビジュアルモード）を開始
 ```
 
-## Visual commands
+## 視覚的コマンド
 ```bash
->       # shift text right
-<       # shift text left
-y       # yank (copy) marked text
-d       # delete marked text
-~       # switch case
+>       # 文を右にずらす
+<       # 文を左にずらす
+y       # 印付けされた文をヤンク（コピー）する
+d       # 印付けされた文を削除する
+~       # ケースをスイッチする
 ```
 
-## Cut and paste
+## 切り取りと貼り付け
 ```bash
-yy       # yank (copy) a line
-2yy      # yank (copy) 2 lines
-yw       # yank (copy) the characters of the word from the cursor position to the start of the next word
-y$       # yank (copy) to end of line
-p        # put (paste) the clipboard after cursor
-P        # put (paste) before cursor
-dd       # delete (cut) a line
-2dd      # delete (cut) 2 lines
-dw       # delete (cut) the characters of the word from the cursor position to the start of the next word
-D        # delete (cut) to the end of the line
-d$       # delete (cut) to the end of the line
-d^       # delete (cut) to the first non-blank character of the line
-d0       # delete (cut) to the begining of the line
-x        # delete (cut) character
+yy       # 1行コピー
+2yy      # 2行コピー
+yw       # カーソル位置～次単語先頭まで，コピー
+y$       # 行末までコピー
+p        # カーソル直後に貼り付け
+P        # カーソル直前に貼り付け
+dd       # 1行削除
+2dd      # 2行削除
+dw       # カーソル位置～次単語先頭まで，削除
+D        # カーソル位置～行末まで削除
+d$       # カーソル位置～行末まで削除
+d^       # カーソル位置～行頭まで，削除（行頭の空白文字は除外する）
+d0       # カーソル位置～行頭まで，削除
+x        # 1文字削除
 ```
 
-## Search and replace
+## 検索と置換操作
+PTNはパターン文字列（正規表現）
 ```bash
-/pattern       # search for pattern
-?pattern       # search backward for pattern
-\vpattern      # 'very magic' pattern: non-alphanumeric characters are interpreted as special regex symbols (no escaping needed)
-n              # repeat search in same direction
-N              # repeat search in opposite direction
-:%s/old/new/g  # replace all old with new throughout file
-:%s/old/new/gc # replace all old with new throughout file with confirmations
-:noh           # remove highlighting of search matches
+/PTN     # PTNで次パターン検索
+?PTN     # PTNで前パターン検索
+\VPTN    # 超マジックなパターン（`very magic` Pattern): 英数字以外の文字は特別な正規表現記号として解釈される（エスケープ不要）
+n              # 次の一致した箇所へ移動
+N              # 逆方向に検索
+:%s/OLD/NEW/g  # ファイル全体で，OLDからNEWに置き換え
+:%s/OLD/NEW/gc # ファイル全体で，OLDからNEWに置き換え（確認しながら）
+:noh           # 検索結果の強調表示（ハイライト）を消す
 ```
 
-## Search in multiple files
+## 複数ファイルにおける検索
 ```bash
-:vimgrep /pattern/ {file} # search for pattern in multiple files
-:cn                       # jump to the next match
-:cp                       # jump to the previous match
-:copen                    # open a window containing the list of matches
+:vimgrep /PTN/ {file}     # 複数ファイルにおけるパターン検索
+:cn                       # 次の一致した箇所へ移動
+:cp                       # 前の一致した箇所へ移動
+:copen                    # 一致したものリストをウィンドウで開く
 ```
 
-## Exiting
+## 終了
 ```bash
-:w              # write (save) the file, but don't exit
-:w !sudo tee %  # write out the current file using sudo
-:wq or :x or ZZ # write (save) and quit
-:q              # quit (fails if there are unsaved changes)
-:q! or ZQ       # quit and throw away unsaved changes
+:w              # 書込（保存）
+:w !sudo tee %  # SUDO権限で書込
+:wq or :x or ZZ # 書込と終了
+:q              # 終了（書込していないと失敗する）
+:q! or ZQ       # 保存せずに終了
 ```
 
-## Working with multiple files
+## 複数ファイルの操作
 ```bash
-:e file       # edit a file in a new buffer
-:bnext or :bn # go to the next buffer
-:bprev or :bp # go to the previous buffer
-:bd           # delete a buffer (close a file)
-:ls           # list all open buffers
-:sp file      # open a file in a new buffer and split window
-:vsp file     # open a file in a new buffer and vertically split window
-Ctrl + ws     # split window
-Ctrl + ww     # switch windows
-Ctrl + wq     # quit a window
-Ctrl + wv     # split window vertically
-Ctrl + wh     # move cursor to the left window (vertical split)
-Ctrl + wl     # move cursor to the right window (vertical split)
-Ctrl + wj     # move cursor to the window below (horizontal split)
-Ctrl + wk     # move cursor to the window above (horizontal split)
+:e FILE       # 新たなバッファでFILEを編集
+:bnext or :bn # 次のバッファへ
+:bprev or :bp # 前のバッファへ
+:bd           # バッファの除去（ファイルを閉じる）
+:ls           # 全ての開いているバッファのリスト
+:sp FILE      # 新たなバッファでFILEを開き，左右ウィンドウ分割
+:vsp FILE     # 新たなバッファでFILEを開き，上下ウィンドウ分割
+Ctrl + ws     # ウィンドウ分割（左右）
+Ctrl + ww     # ウィンドウ移動
+Ctrl + wq     # ウィンドウ終了
+Ctrl + wv     # ウィンドウ分割（上下）
+Ctrl + wh     # 左ウィンドウに移動 (左右分割において)
+Ctrl + wl     # 右（左右分割において）
+Ctrl + wj     # 下 (上下分割において)
+Ctrl + wk     # 上 (上下分割において)
 ```
 
-## Tabs
+## タブ操作
+
 ```bash
-:tabnew or :tabnew file # open a file in a new tab
-Ctrl + wT               # move the current split window into its own tab
-gt or :tabnext or :tabn # move to the next tab
-gT or :tabprev or :tabp # move to the previous tab
-<number>gt              # move to tab <number>
-:tabmove <number>       # move current tab to the <number>th position (indexed from 0)
-:tabclose or :tabc      # close the current tab and all its windows
-:tabonly or :tabo       # close all tabs except for the current one
-:tabdo command          # run the command on all tabs (e.g. :tabdo q - closes all opened tabs)
+:tabnew or :tabnew FILE # 新たなタブを開く（FILEで開く）
+Ctrl + wT               # 現在の分割ウィンドウを別タブに移動する
+gt or :tabnext or :tabn # 次タブへ
+gT or :tabprev or :tabp # 前タブへ
+<number>gt              # タブ番号<number>へ
+:tabmove <number>       # 現在のタブを<number>番目似移動する（タブの順番は0番目から始まる）
+:tabclose or :tabc      # 現在のタブとすべてにウィンドウを閉じる
+:tabonly or :tabo       # 現在のタブ以外のすべてのタブを閉じる
+:tabdo command          # 全タブでコマンド実行 (例: `:tabdo q` すべての開いているタブを閉じる)
 ```
