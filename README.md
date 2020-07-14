@@ -1,6 +1,7 @@
 # Vim チートシート（日本語版）
 
 >Disclaimer: This cheatsheet is summarized from personal experience and other online tutorials. It should not be considered as an official advice.
+> 免責事項：このチートシートは、個人的知見とネットのチュートリアルから要約されています。それは公式ではないです。
 > 原文: ackjutsu/vim-cheatsheet
 
 ## 全般
